@@ -17,7 +17,10 @@ public abstract class Car {
 		result += nums;
 		return result;
 	}
+
+
 	
 	public abstract String toString();
-	public abstract double cost();
+	public abstract double totalCost();
+	public abstract double extraCost();
 }

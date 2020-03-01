@@ -11,13 +11,19 @@ import p3.Cars.SUV;
 import p3.Cars.Standard;
 
 public class Store {
+	private SimpleCarFactory manufacturer; //here we are doing a simple factory since there will not be different types of car manufacturers
 	private ArrayList<Car> cars;
 	
-	public Store() {
+	public Store(SimpleCarFactory manufacturer) {
+		this.manufacturer = manufacturer;
+		generateCars();
+	}
+
+	private void generateCars() {
 		cars = new ArrayList<Car>();
 		String[] carTypes = {"Economy", "Standard", "Luxury", "SUV", "Minivan"};
 		for(int i = 0; i < 10; i++) {
-			cars.add(createCar(carTypes[(int)(Math.random()*5)]));
+			cars.add(manufacturer.createCar(carTypes[(int)(Math.random()*5)]));
 		}
 	}
 	
@@ -25,20 +31,5 @@ public class Store {
 		for(Car c : cars) {
 			System.out.println(c);
 		}
-	}
-	
-	public Car createCar(String type) {
-		if(type.equals("Economy")) {
-			return new Economy();
-		} else if (type.equals("Standard")) {
-			return new Standard();
-		} else if (type.equals("Luxury")) {
-			return new Luxury();
-		} else if (type.equals("SUV")) {
-			return new SUV();
-		} else if (type.equals("Minivan")) {
-			return new Minivan();
-		}
-		return null;
 	}
 }
