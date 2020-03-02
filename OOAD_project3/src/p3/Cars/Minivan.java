@@ -4,12 +4,15 @@ public class Minivan extends Car {
 	public Minivan() {
 		super();
 	}
-	@Override
+	//@Override
 	public String toString() {
-		return "Minivan: " + plate + ", costs: " + cost();
+		return "Minivan: " + plate + ", costs: " + totalCost();
 	}
-	public double cost() {
+	public double totalCost() {
 		return 45;
+	}
+	public double extraCost() {
+		return 5;
 	}
 
 }
