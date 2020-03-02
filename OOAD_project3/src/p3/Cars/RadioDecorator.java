@@ -1,11 +1,8 @@
 package p3.Cars;
 
 public class RadioDecorator extends CarDecorator{
-
-    Car car;
     public RadioDecorator(Car c) {
-        car = c;
-        //super(c);
+        super(c);
     }
 
     public String toString() {

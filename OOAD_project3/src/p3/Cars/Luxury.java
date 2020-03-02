@@ -3,12 +3,13 @@ package p3.Cars;
 public class Luxury extends Car {
 	
 	public Luxury() {
-		super();
+		super(70);
 	}
 	//@Override
 	public String toString() {
 		return "Luxury: " + plate + ", costs: " + totalCost();
 	}
+
 	public double totalCost() {
 		return 70;
 	}

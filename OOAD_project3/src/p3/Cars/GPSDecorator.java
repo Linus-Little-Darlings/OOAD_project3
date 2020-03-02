@@ -1,10 +1,9 @@
+
 package p3.Cars;
 
 public class GPSDecorator extends CarDecorator{
-    Car car;
     public GPSDecorator(Car c) {
-        car = c;
-        //super(c);
+        super(c);
     }
 
     public String toString() {
