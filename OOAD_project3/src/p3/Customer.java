@@ -2,7 +2,7 @@ package p3;
 
 public abstract class Customer {
 	private String custType;
-	private CustomerBehavior behavior; //implementing strategy pattern with this
+	//private CustomerBehavior behavior; //implementing strategy pattern with this
 	private int carsRented = 0;
 
 	public Customer(String type) {
@@ -13,14 +13,10 @@ public abstract class Customer {
 		return custType;
 	}
 
-	public Customer getCustomer() {
-		return self;
-	}
-
 	public int getNumRentals() {
 		return carsRented;
 	}
 
-	public
+	
 }
 

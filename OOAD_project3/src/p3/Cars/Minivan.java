@@ -4,6 +4,11 @@ public class Minivan extends Car {
 	public Minivan() {
 		super(45);
 	}
+	public String getType() {
+		return "Minivan";
+	}
+	
+	
 	//@Override
 	public String toString() {
 		return "Minivan: " + plate + ", costs: " + totalCost();
@@ -11,9 +16,6 @@ public class Minivan extends Car {
 
 	public double totalCost() {
 		return 45;
-	}
-	public double extraCost() {
-		return 5;
 	}
 
 }

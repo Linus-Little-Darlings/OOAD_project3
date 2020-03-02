@@ -5,6 +5,10 @@ public class Economy extends Car {
 	public Economy() {
 		super(30);
 	}
+	public String getType() {
+		return "Economy";
+	}
+	
 	public String toString() {
 		return "Economy: " + plate + ", costs: " + totalCost();
 	}
@@ -12,7 +16,4 @@ public class Economy extends Car {
 		return 30;
 	}
 
-	public double extraCost() {
-		return 0;
-	}
 }

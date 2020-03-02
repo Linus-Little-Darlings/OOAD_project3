@@ -2,12 +2,11 @@ package p3.Cars;
 
 public abstract class Car {
 	protected String plate;
-	protected int daysRented;
 	protected double costPerDay;
 	public Car(double costPerDay) {
 		plate = randomPlate();
 		this.costPerDay = costPerDay;
-		this.daysRented = 0;
+		
 	}
 	
 	private String randomPlate() {
@@ -22,14 +21,9 @@ public abstract class Car {
 		return result;
 	}
 
-
-	
-	public void rentOut(int numDays) {
-		daysRented = numDays;
-	}
+	public abstract String getType();
 	
 	public abstract String toString();
 
 	public abstract double totalCost();
-	public abstract double extraCost();
 }

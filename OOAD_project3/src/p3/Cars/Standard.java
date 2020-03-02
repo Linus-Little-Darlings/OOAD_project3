@@ -4,6 +4,10 @@ public class Standard extends Car {
 	public Standard() {
 		super(40);
 	}
+	public String getType() {
+		return "Standard";
+	}
+	
 	@Override
 	public String toString() {
 		return "Standard: " + plate + ", costs: " + totalCost();
@@ -13,7 +17,4 @@ public class Standard extends Car {
 		return 40;
 	}
 
-	public double extraCost() {
-		return 8;
-	}
 }

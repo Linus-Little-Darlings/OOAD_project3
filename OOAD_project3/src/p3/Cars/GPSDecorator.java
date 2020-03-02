@@ -15,6 +15,6 @@ public class GPSDecorator extends CarDecorator{
     }
 
     public double extraCost() {
-        return car.extraCost() + 15;
+        return 15;
     }
 }

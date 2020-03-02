@@ -6,7 +6,7 @@ public class RadioDecorator extends CarDecorator{
     }
 
     public String toString() {
-        return car.toString() + ", "+ totalCost() + " with car seat";
+        return car.toString() + ", "+ totalCost() + " with radio";
     }
 
     public double totalCost() {
@@ -14,6 +14,6 @@ public class RadioDecorator extends CarDecorator{
     }
 
     public double extraCost() {
-        return car.extraCost() + 12;
+        return 12;
     }
 }

@@ -1,7 +1,6 @@
 package p3.Cars;
 
 public class CarSeatDecorator extends CarDecorator {
-	Car car;
 	public CarSeatDecorator(Car c) {
 		super(c);
 	}
@@ -15,7 +14,7 @@ public class CarSeatDecorator extends CarDecorator {
 	}
 
 	public double extraCost() {
-		return car.extraCost() + 10;
+		return 10;
 	}
 
 }
