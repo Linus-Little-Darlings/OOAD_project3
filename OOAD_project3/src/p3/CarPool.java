@@ -15,10 +15,10 @@ import p3.Cars.Minivan;
 import p3.Cars.SUV;
 import p3.Cars.Standard;
 
-public class CarPool {
+public class CarPool { //car factory tied with car pool
 	private ArrayList<Car> cars;
 	
-	public CarPool(int size) {
+	public CarPool(int size) { //car pool initializes the types of cars in avail. at the store
 		cars = new ArrayList<Car>(size);
 		String[] carTypes = {"Economy", "Standard", "Luxury", "SUV", "Minivan"};
 		for(int i = 0; i < size; i++) {
@@ -44,7 +44,7 @@ public class CarPool {
         return car;
     }
 	
-	public Car getCarByType(String type) {
+	public Car getCarByType(String type) { //this function looks for the car being rented and removes it from the pool
 		for(Car c : cars) {
 			if(c.getType().equals(type)) {
 				cars.remove(c);
