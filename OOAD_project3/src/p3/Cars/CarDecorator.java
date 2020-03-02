@@ -8,5 +8,6 @@ public abstract class CarDecorator extends Car {
 	}
 	//@Override
 	public abstract String toString();
-	public abstract double cost();
+	public abstract double totalCost();
+	public abstract double extraCost();
 }

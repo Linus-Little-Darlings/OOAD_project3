@@ -5,9 +5,18 @@ public class SUV extends Car {
 	public SUV() {
 		super(50);
 	}
-	@Override
+	//@Override
 	public String toString() {
-		return "SUV: " + plate + ", costs: " + cost();
+		return "SUV: " + plate + ", costs: " + totalCost();
 	}
+
+	public double totalCost() {
+		return 50;
+	}
+
+	public double extraCost() {
+		return 10;
+	}
+
 
 }

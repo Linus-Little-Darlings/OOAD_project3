@@ -5,14 +5,17 @@ public class CarSeatDecorator extends CarDecorator {
 	public CarSeatDecorator(Car c) {
 		super(c);
 	}
-	@Override
+
 	public String toString() {
-		return car.toString() + ", "+ cost() + " with car seat";
+		return car.toString() + ", "+ totalCost() + " with car seat";
 	}
 
-	@Override
-	public double cost() {
-		return car.cost() + 10;
+	public double totalCost() {
+		return car.totalCost() + extraCost();
+	}
+
+	public double extraCost() {
+		return car.extraCost() + 10;
 	}
 
 }

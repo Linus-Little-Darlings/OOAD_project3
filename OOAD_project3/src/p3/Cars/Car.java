@@ -21,13 +21,15 @@ public abstract class Car {
 		result += nums;
 		return result;
 	}
+
+
 	
 	public void rentOut(int numDays) {
 		daysRented = numDays;
 	}
 	
 	public abstract String toString();
-	public double cost() {
-		return daysRented * costPerDay;
-	};
+
+	public abstract double totalCost();
+	public abstract double extraCost();
 }

@@ -14,13 +14,20 @@ import p3.Cars.Standard;
 import p3.Customers.Customer;
 
 public class Store implements DayTracker {
+
+	private SimpleCarFactory manufacturer; //here we are doing a simple factory since there will not be different types of car manufacturers
 	private ArrayList<Car> cars;
 	
 	public Store() {
+		this.manufacturer = new SimpleCarFactory();
+		generateCars();
+	}
+
+	private void generateCars() {
 		cars = new ArrayList<Car>();
 		String[] carTypes = {"Economy", "Standard", "Luxury", "SUV", "Minivan"};
 		for(int i = 0; i < 10; i++) {
-			cars.add(createCar(carTypes[(int)(Math.random()*5)]));
+			cars.add(manufacturer.createCar(carTypes[(int)(Math.random()*5)]));
 		}
 		/*
 		 * Car c = new Luxury(); c = new CarSeatDecorator(c); c = new GPSDecorator(c); c
@@ -58,4 +65,5 @@ public class Store implements DayTracker {
 	public void passDay() {
 		return;
 	}
+
 }
