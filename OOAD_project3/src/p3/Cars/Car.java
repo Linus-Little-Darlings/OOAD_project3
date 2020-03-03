@@ -21,6 +21,8 @@ public abstract class Car {
 		return result;
 	}
 
+	public String getPlate() { return this.plate; }
+
 	public abstract String getType();
 	
 	public abstract String toString();

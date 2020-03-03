@@ -6,6 +6,7 @@ public class GPSDecorator extends CarDecorator{
         super(c);
     }
 
+
     public String toString() {
         return car.toString() + ", "+ totalCost() + " with GPS";
     }

@@ -1,46 +1,51 @@
 package p3.Customers;
+import p3.RentalRecord;
 import p3.Store;
 
 import java.util.ArrayList;
 
 import p3.DayTracker;
-import p3.Cars.Car;
-import p3.Cars.Rental;
-import p3.Cars.RentalListener;
 
-public abstract class Customer implements DayTracker, RentalListener {
-	protected ArrayList<Car> rentedCars;
+public abstract class Customer {
+	protected ArrayList<RentalRecord> rentedCars;
 	protected int numCars;
 	protected int id;
-	private String custType;
+	protected String custType;
 	protected Store store;
 	
 	public Customer(Store store) {
-		this.rentedCars = new ArrayList<Car>();
+		this.rentedCars = new ArrayList<RentalRecord>(); //rental record array to make sure that ??
 		this.id = (int)(Math.random() * 999);
 		this.numCars = 0;
 		this.store = store;
+	}
+
+	public void addRental(RentalRecord r) {
+		this.rentedCars.add(r);
+	}
+
+	public int getID() {
+		return id;
+	}
+
+	protected int daysToRent(int minDays, int maxDays) {
+		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1));
+		return chosenDays;
 	}
 
 	public String getCustomerType() {
 		return custType;
 	}
 
-	public void returnCar(Car c) {
-		rentedCars.remove(c);
+	public void returnCar(RentalRecord r) {
+		rentedCars.remove(r);
 		numCars--;
 	}
-	
-	public void passDay() {
-//		for(Car r : rentedCars) {
-//			r.passDay();
-//		}
-		return;
+
+	public ArrayList<RentalRecord> getRentedCars() {
+		return rentedCars;
 	}
-	
-	public int numCars() {
-		return rentedCars.size();
-	}
+
 	
 	abstract public String toString();
 	abstract public boolean canRent();

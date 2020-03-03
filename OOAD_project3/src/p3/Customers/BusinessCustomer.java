@@ -10,6 +10,7 @@ public class BusinessCustomer extends Customer {
 
     public BusinessCustomer(Store store) {
         super(store);
+        custType = "Business";
     }
 
     public String toString() {
@@ -17,7 +18,7 @@ public class BusinessCustomer extends Customer {
     }
 
     public boolean canRent() {
-        if(numCars == 0) {
+        if((numCars == 0) && (store.inventorySize() >= 3)) {
             return true;
         }
         return false;

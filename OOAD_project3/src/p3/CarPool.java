@@ -1,12 +1,6 @@
 package p3;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-
-import javax.naming.Context;
-import javax.naming.Name;
-import javax.naming.spi.ObjectFactory;
 
 import p3.Cars.Car;
 import p3.Cars.Economy;
@@ -58,6 +52,7 @@ public class CarPool { //car factory tied with car pool
 		return cars;
 	}
 	public void returnCar(Car c) {
+		cars.add(c);
 		return;
 	}
 }

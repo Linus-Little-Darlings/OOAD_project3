@@ -5,6 +5,10 @@ public class RadioDecorator extends CarDecorator{
         super(c);
     }
 
+    public String getOptionName() {
+        return "Radio";
+    }
+
     public String toString() {
         return car.toString() + ", "+ totalCost() + " with radio";
     }

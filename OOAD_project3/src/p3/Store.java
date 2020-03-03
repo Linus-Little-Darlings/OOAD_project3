@@ -5,29 +5,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 import p3.Cars.Car;
-import p3.Cars.CarSeatDecorator;
-import p3.Cars.Economy;
-import p3.Cars.GPSDecorator;
-import p3.Cars.Luxury;
-import p3.Cars.Minivan;
-import p3.Cars.RadioDecorator;
-import p3.Cars.Rental;
-import p3.Cars.RentalListener;
-import p3.Cars.SUV;
-import p3.Cars.Standard;
 import p3.Customers.Customer;
 
-public class Store implements DayTracker, RentalListener {
+public class Store implements DayTracker { //implementing subject interface for observer pattern
 	private CarPool inventory;
 	private ArrayList<RentalRecord> activeRentals;
 	private ArrayList<RentalRecord> rentalHistory;
+	private ArrayList<RentalRecord> dayRentals;
 	private OptionFactory optionFactory;
+	private ArrayList<Observer> observers; //to hold the observers
+	private int totalRevenue;
+	private int dayRevenue;
+	private int dayNum;
 	
 	public Store() {
 		inventory = new CarPool(24);
 		activeRentals = new ArrayList<RentalRecord>();
 		rentalHistory = new ArrayList<RentalRecord>();
+		dayRentals = new ArrayList<RentalRecord>();
 		optionFactory = new OptionFactory();
+		observers = new ArrayList<Observer>();
+		dayNum = 1;
+	}
+
+	public void registerObserver(Observer o) { //implement observer registration
+		observers.add(o);
+	}
+
+	public void notifyObservers() {
+		for(Observer o : observers) {
+			o.update(this.dayRevenue, this.dayNum, dayRentals, activeRentals, inventory.getCars());
+		}
+	}
+
+	public int inventorySize() {
+		return inventory.getCars().size();
 	}
 	
 	public void printInventory() {
@@ -37,51 +49,91 @@ public class Store implements DayTracker, RentalListener {
 		}
 		System.out.println();
 	}
-	
-	public void printActiveRentals() {
-		System.out.println("Active Rentals:");
-		for(RentalRecord r : activeRentals) {
-			System.out.println(r);
-		}
-		System.out.println();
-	}
-	
-	public void printRentalHistory() {
-		System.out.println("Rental History:");
-		for(RentalRecord r : rentalHistory) {
-			System.out.println(r);
-		}
-		System.out.println();
-	}
+
 	
 	public void rentCar(Customer cust, String carType, int days, String[] options) {
 		Car c = inventory.getCarByType(carType); //sees if car type is availiable, decorates, and adds to cust rent
 		if(c != null) {
 			for(int i = 0; i < options.length; i++) {
-				c = optionFactory.addOption(c, options[i]); //adding chosen options
-			}
-			System.out.println("Renting " + c + " to " + cust);
 
-			activeRentals.add(new RentalRecord(c, cust, days));
+				c = optionFactory.addOption(c, options[i]); //adding chosen options - this is implementing the decorator
+			}
+			RentalRecord newRental = new RentalRecord(c, cust, days, options);
+			cust.addRental(newRental);
+			activeRentals.add(newRental);
+			dayRevenue+=newRental.getTotalCost();
+			dayRentals.add(newRental);
 			//cust.rent(new Rental(c, days, new RentalListener[] {this, cust})
 		} else {
 			System.out.println("Unable to rent " + carType + " to " + cust + ", none left in inventory.");
 		}
 	}
 	
-	public void returnCar(Car c) { //not working
-		inventory.returnCar(c);
-		for(RentalRecord r : activeRentals) {
-			if(r.getCar().equals(c)) {
-				activeRentals.remove(r);
-				rentalHistory.add(r);
-			}
-		}
+	public void returnCar(Car c, RentalRecord r) { //not working
+		inventory.returnCar(c); //return car to the inventory
+		//System.out.println("Removing " + c.toString() + " from active rentals.");
+		r.getCustomer().returnCar(r); //if one cust has more than one car in its rentals, all will be returned with pass day
+		//could alternatively do for loop to return all cars in customer rental array but this works too
+		activeRentals.remove(r); //remove the rental record from active records
+		rentalHistory.add(r); //and add it to the history
 	}
 	
 	public void passDay() {
-		
+		this.totalRevenue += dayRevenue; //update total revenue with the day's cost
+		for(int i = 0; i < activeRentals.size(); i++) {
+			RentalRecord r = activeRentals.get(i);
+			int daysLeft = r.getDaysLeft(); //get the amount of days the car has left
+			daysLeft--; //decrement it by one since a day has passed
+			if(daysLeft == 0) { //check if it will be returned in the morning
+				returnCar(r.getCar(), r); //if it will, return
+			}
+			else {
+				r.setDaysLeft(daysLeft);
+			}
+		}
+		//update observer here
+		notifyObservers(); //this is also the print statement for the day
+		//reset day variables
+		this.dayRevenue = 0;
+		this.dayNum++;
+		this.dayRentals.clear();
+		if(dayNum >= 35) {
+			finalDay();
+		}
 		return;
+	}
+
+	private void finalDay() {
+		for(int i = 0; i < activeRentals.size(); i++ ) { //returning all cars to inventory and adding to rental history, as the shop is CLOSED
+			RentalRecord a = activeRentals.get(i);
+			returnCar(a.getCar(), a);
+		}
+		int totalRentals = rentalHistory.size();
+		int businessRentals = 0;
+		int casualRentals = 0;
+		int regularRentals = 0;
+		//getting number of rentals by customer type
+		for( RentalRecord r : rentalHistory) {
+			String custType = r.getCustomer().getCustomerType(); //checking customer type to add to classification
+			if(custType == "Business") {
+				businessRentals++;
+			}
+			else if(custType == "Casual") {
+				casualRentals++;
+			}
+			else {
+				regularRentals++;
+			}
+		}
+		//print time, baby
+		System.out.println(" ------------------------ ");
+		System.out.println(" That was the end of the simulation! ");
+		System.out.println(" ------------------------ ");
+		System.out.println("  Total Completed Rentals: " + totalRentals + "  ");
+		System.out.println("  Total Business Rentals: " + businessRentals + "  ");
+		System.out.println("  Total Casual Rentals: " + casualRentals + "  ");
+		System.out.println("  Total Regular Rentals: " + regularRentals + "  ");
+		System.out.println("  Total Revenue: $" + this.totalRevenue + "    ");
 	}
 
 	public static Map<Integer, Object> randomCar(int minDays, int maxDays){
@@ -104,7 +156,7 @@ public class Store implements DayTracker, RentalListener {
 			chosenOptions[k] = "Car Seat";
 		}
 		String chosenType = carTypes[(int)(Math.random() * carTypes.length)];
-		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1));
+		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1)); //delete this later
 		Map<Integer, Object> map = new HashMap<Integer, Object>();
 		map.put(0, chosenType);
 		map.put(1, chosenDays);
