@@ -14,7 +14,7 @@ public class RentalRecord {
 	private double totalCost;
 	private String options[];
 	
-	public RentalRecord(Car c, Customer cust, int days, String ops[]) {
+	public RentalRecord(Car c, Customer cust, int days, String ops[]) { //this is what keeps track of each rental
 		customer = cust;
 		car = c;
 		daysRented = days;
@@ -22,7 +22,7 @@ public class RentalRecord {
 		totalCost = c.totalCost() * daysRented;
 		options = ops;
 	}
-
+//just a bunch of getters and setters
 	public String[] getOptions() {
 		return options;
 	}

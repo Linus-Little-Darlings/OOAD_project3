@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import p3.DayTracker;
 
-public abstract class Customer {
+public abstract class Customer { //customer object used as a guide
 	protected ArrayList<RentalRecord> rentedCars;
 	protected int numCars;
 	protected int id;
@@ -14,7 +14,7 @@ public abstract class Customer {
 	protected Store store;
 	
 	public Customer(Store store) {
-		this.rentedCars = new ArrayList<RentalRecord>(); //rental record array to make sure that ??
+		this.rentedCars = new ArrayList<RentalRecord>(); //rental record array to use in printing
 		this.id = (int)(Math.random() * 999);
 		this.numCars = 0;
 		this.store = store;
@@ -28,7 +28,7 @@ public abstract class Customer {
 		return id;
 	}
 
-	protected int daysToRent(int minDays, int maxDays) {
+	protected int daysToRent(int minDays, int maxDays) { //helper function to get the amount of days that a car will be rented
 		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1));
 		return chosenDays;
 	}

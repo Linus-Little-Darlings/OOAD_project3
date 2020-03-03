@@ -5,7 +5,7 @@ import p3.Customers.Customer;
 
 import java.util.ArrayList;
 
-public class BookKeeper implements Observer, DisplayElement {
+public class BookKeeper implements Observer, DisplayElement { //acts as the observer and the display for this store
     private int dayRevenue;
     private int dayNumber;
     private int numRentalsToday;
@@ -25,7 +25,7 @@ public class BookKeeper implements Observer, DisplayElement {
     public void update(int dayRevenue, int dayNum, ArrayList<RentalRecord> dayRentals, ArrayList<RentalRecord> activeRentals, ArrayList<Car> carsLeft) {
         this.dayRevenue = dayRevenue;
         this.dayNumber = dayNum;
-        this.numRentalsToday = dayRentals.size();
+        this.numRentalsToday = dayRentals.size(); //updating info to display
         this.dayRentals = dayRentals;
         this.numActiveRentals = activeRentals.size();
         this.activeRentals = activeRentals;
@@ -33,7 +33,7 @@ public class BookKeeper implements Observer, DisplayElement {
         display();
     }
 
-    public void display() { //printing the day's information
+    public void display() { //printing the day's information. this is just a bunch of print statements
         System.out.println(" ------------------------ ");
         System.out.println("         Day " + dayNumber + "            ");
         System.out.println(" ------------------------ ");

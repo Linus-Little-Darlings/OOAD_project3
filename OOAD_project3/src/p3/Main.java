@@ -41,7 +41,6 @@ public class Main {
 					if (activeCustomer.canRent()) { //check to make sure the type of customer is able to rent at this time
 						activeCustomer.rent();
 					}
-					//here needs to be where the days are going
 				}
 			}
 			store.passDay(); //move along the day in the store

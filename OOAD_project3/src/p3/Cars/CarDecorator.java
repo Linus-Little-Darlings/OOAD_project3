@@ -1,6 +1,6 @@
 package p3.Cars;
 
-public abstract class CarDecorator extends Car {
+public abstract class CarDecorator extends Car { //this is the abstract decorator that the concrete decorators will use
 	public Car car;
 	public CarDecorator(Car c) {
 		super(c.costPerDay);

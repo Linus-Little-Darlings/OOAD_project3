@@ -1,6 +1,6 @@
 package p3.Cars;
 
-public class RadioDecorator extends CarDecorator{
+public class RadioDecorator extends CarDecorator{ //decorates w radio
     public RadioDecorator(Car c) {
         super(c);
     }

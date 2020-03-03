@@ -1,7 +1,7 @@
 
 package p3.Cars;
 
-public class GPSDecorator extends CarDecorator{
+public class GPSDecorator extends CarDecorator{ //decorates w car seat
     public GPSDecorator(Car c) {
         super(c);
     }

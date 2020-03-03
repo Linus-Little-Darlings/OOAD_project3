@@ -6,7 +6,7 @@ import java.util.Map;
 
 import p3.Cars.Car;
 import p3.Customers.Customer;
-
+//this is the big boi
 public class Store implements DayTracker { //implementing subject interface for observer pattern
 	private CarPool inventory;
 	private ArrayList<RentalRecord> activeRentals;
@@ -30,9 +30,9 @@ public class Store implements DayTracker { //implementing subject interface for 
 
 	public void registerObserver(Observer o) { //implement observer registration
 		observers.add(o);
-	}
+	} //observer func
 
-	public void notifyObservers() {
+	public void notifyObservers() { //observer func
 		for(Observer o : observers) {
 			o.update(this.dayRevenue, this.dayNum, dayRentals, activeRentals, inventory.getCars());
 		}
@@ -40,14 +40,6 @@ public class Store implements DayTracker { //implementing subject interface for 
 
 	public int inventorySize() {
 		return inventory.getCars().size();
-	}
-	
-	public void printInventory() {
-		System.out.println("Current Inventory:");
-		for(Car c : inventory.getCars()) {
-			System.out.println(c);
-		}
-		System.out.println();
 	}
 
 	
@@ -69,7 +61,7 @@ public class Store implements DayTracker { //implementing subject interface for 
 		}
 	}
 	
-	public void returnCar(Car c, RentalRecord r) { //not working
+	public void returnCar(Car c, RentalRecord r) {
 		inventory.returnCar(c); //return car to the inventory
 		//System.out.println("Removing " + c.toString() + " from active rentals.");
 		r.getCustomer().returnCar(r); //if one cust has more than one car in its rentals, all will be returned with pass day
@@ -156,7 +148,7 @@ public class Store implements DayTracker { //implementing subject interface for 
 			chosenOptions[k] = "Car Seat";
 		}
 		String chosenType = carTypes[(int)(Math.random() * carTypes.length)];
-		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1)); //delete this later
+		int chosenDays = minDays + (int)(Math.random() * (maxDays - minDays + 1)); //this is an unused return but oh well
 		Map<Integer, Object> map = new HashMap<Integer, Object>();
 		map.put(0, chosenType);
 		map.put(1, chosenDays);

@@ -1,6 +1,6 @@
 package p3.Cars;
 
-public class CarSeatDecorator extends CarDecorator {
+public class CarSeatDecorator extends CarDecorator { //decorator
 	public CarSeatDecorator(Car c) {
 		super(c);
 	}

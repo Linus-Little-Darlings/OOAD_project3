@@ -1,9 +1,9 @@
 package p3.Cars;
 
-public abstract class Car {
+public abstract class Car { //baseline for each car
 	protected String plate;
 	protected double costPerDay;
-	public Car(double costPerDay) {
+	public Car(double costPerDay) { //used in car pool factory
 		plate = randomPlate();
 		this.costPerDay = costPerDay;
 		
